@@ -36,6 +36,7 @@ BuildRequires:	avahi-common-devel
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	boost-devel
+BuildRequires:	boost-core-devel
 BuildRequires:	pkgconfig(libcurl) >= 7.18
 # sound servers
 BuildRequires:	pkgconfig(alsa) >= 0.9.0
