@@ -24,7 +24,7 @@ Source1:	%{name}.conf
 Source2:        %{name}.tmpfiles.d
 Source3:	%{name}.logrotate
 Source100:	%{name}.rpmlintrc
-
+Patch1:		mpd-0.19.17-wildmidi0.4.patch
 Requires(pre,post):	rpm-helper
 Requires(preun,postun):	rpm-helper
 BuildRequires:	pkgconfig(sqlite3)
@@ -98,7 +98,7 @@ of libfaad2, which is patent-protected.
 %prep
 %setup -q
 autoreconf -vfi
-
+%apply_patches
 
 %build
 # Mad and sidplay option make the build to fail
