@@ -14,17 +14,16 @@
 Summary:	MPD, the Music Player Daemon
 
 Name:		mpd
-Version:	0.19.17
+Version:	0.20.13
 Release:	1%{?extrarelsuffix}
 License:	GPLv2+
 Group:		Sound
 Url:		http://www.musicpd.org/
-Source0:	http://www.musicpd.org/download/%{name}/%{name}-%{version}.tar.xz
+Source0:	http://www.musicpd.org/download/%{name}/0.20/%{name}-%{version}.tar.xz
 Source1:	%{name}.conf
 Source2:        %{name}.tmpfiles.d
 Source3:	%{name}.logrotate
 Source100:	%{name}.rpmlintrc
-Patch1:		mpd-0.19.17-wildmidi0.4.patch
 Requires(pre,post):	rpm-helper
 Requires(preun,postun):	rpm-helper
 BuildRequires:	pkgconfig(sqlite3)
@@ -187,7 +186,7 @@ then
 fi
 
 %files
-%doc README AUTHORS NEWS doc/mpdconf.example
+%doc README.md AUTHORS NEWS doc/mpdconf.example
 %{_bindir}/%{name}
 %{_mandir}/man1/*
 %{_mandir}/man5/*
