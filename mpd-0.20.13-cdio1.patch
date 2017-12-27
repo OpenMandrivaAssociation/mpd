@@ -1,0 +1,15 @@
+--- mpd-0.20.13/src/archive/plugins/Iso9660ArchivePlugin.cxx.orig	2017-12-27 09:45:22.948274384 +0000
++++ mpd-0.20.13/src/archive/plugins/Iso9660ArchivePlugin.cxx	2017-12-27 09:46:18.457914651 +0000
+@@ -115,7 +115,11 @@
+ 			visitor.VisitArchiveEntry(path + 1);
+ 		}
+ 	}
+-	_cdio_list_free (entlist, true);
++#if LIBCDIO_VERSION_NUM >= 10000
++	_cdio_list_free (entlist, true, free);
++#else
++        _cdio_list_free (entlist, true);
++#endif
+ }
+ 
+ static ArchiveFile *

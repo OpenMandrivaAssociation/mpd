@@ -24,6 +24,7 @@ Source1:	%{name}.conf
 Source2:        %{name}.tmpfiles.d
 Source3:	%{name}.logrotate
 Source100:	%{name}.rpmlintrc
+Patch1:		mpd-0.20.13-cdio1.patch
 Requires(pre,post):	rpm-helper
 Requires(preun,postun):	rpm-helper
 BuildRequires:	pkgconfig(sqlite3)
@@ -75,10 +76,9 @@ BuildRequires:	libgme-devel
 BuildRequires:	libmikmod-devel
 BuildRequires:	libmpcdec-devel
 BuildRequires:	wildmidi-devel
-
+BuildRequires:	lame-devel
 %if %{build_plf}
 BuildRequires:	libfaad2-devel
-BuildRequires:	lame-devel
 %endif
 
 %description
@@ -96,7 +96,6 @@ of libfaad2, which is patent-protected.
 
 %prep
 %setup -q
-autoreconf -vfi
 %apply_patches
 
 %build
@@ -140,7 +139,6 @@ autoreconf -vfi
 	--enable-zzip \
 %if !%{build_plf}
 	--disable-aac \
-	--disable-lame-encoder \
 	--disable-mp4v2 \
 %endif
 	--enable-sqlite
