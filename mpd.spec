@@ -14,7 +14,7 @@
 Summary:	MPD, the Music Player Daemon
 
 Name:		mpd
-Version:	0.20.13
+Version:	0.20.20
 Release:	2%{?extrarelsuffix}
 License:	GPLv2+
 Group:		Sound
@@ -24,7 +24,6 @@ Source1:	%{name}.conf
 Source2:        %{name}.tmpfiles.d
 Source3:	%{name}.logrotate
 Source100:	%{name}.rpmlintrc
-Patch1:		mpd-0.20.13-cdio1.patch
 Requires(pre,post):	rpm-helper
 Requires(preun,postun):	rpm-helper
 BuildRequires:	pkgconfig(sqlite3)

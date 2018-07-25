@@ -1,4 +1,5 @@
 removed_sources:
   mpd-0.19.17.tar.xz: 88d98884a262af3be74e2791ae9e5eb898f6dfbb
-sources:
   mpd-0.20.13.tar.xz: d3f7751462a41bbec39a93b322b33350a6f90208
+sources:
+  mpd-0.20.20.tar.xz: 95b5feb53ebbc043ee2934eb2d239e6a3f6cd775
