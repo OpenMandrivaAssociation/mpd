@@ -36,7 +36,10 @@ BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	boost-devel
 BuildRequires:	boost-core-devel
+BuildRequires:	bzip2-devel
 BuildRequires:	pkgconfig(libcurl) >= 7.18
+BuildRequires:	pkgconfig(expat)
+BuildRequires:	pkgconfig(avahi-client)
 # sound servers
 BuildRequires:	pkgconfig(alsa) >= 0.9.0
 BuildRequires:	pkgconfig(jack)
@@ -54,7 +57,6 @@ BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libiso9660)
 BuildRequires:	pkgconfig(libmodplug)
 BuildRequires:	pkgconfig(libmpg123)
-BuildRequires:	pkgconfig(libsidutils)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libupnp)
 BuildRequires:	pkgconfig(mad)
@@ -63,6 +65,7 @@ BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(samplerate) >= 0.0.15
 BuildRequires:	pkgconfig(shout)
 BuildRequires:	pkgconfig(sndfile)
+BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(wavpack)
