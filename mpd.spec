@@ -54,11 +54,9 @@ BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libiso9660)
 BuildRequires:	pkgconfig(libmodplug)
 BuildRequires:	pkgconfig(libmpg123)
-BuildRequires:	pkgconfig(libsidplay2)
 BuildRequires:	pkgconfig(libsidutils)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libupnp)
-BuildRequires:	libmp4v2-devel
 BuildRequires:	pkgconfig(mad)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(opus)
@@ -138,7 +136,6 @@ of libfaad2, which is patent-protected.
 	--enable-zzip \
 %if !%{build_plf}
 	--disable-aac \
-	--disable-mp4v2 \
 %endif
 	--enable-sqlite
 %make
