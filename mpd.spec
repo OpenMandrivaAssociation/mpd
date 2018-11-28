@@ -28,6 +28,7 @@ Source3:	%{name}.logrotate
 Source100:	%{name}.rpmlintrc
 Requires(pre,post):	rpm-helper
 Requires(preun,postun):	rpm-helper
+BuildRequires:	meson
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(atomic_ops)
 BuildRequires:	pkgconfig(systemd)
@@ -76,7 +77,8 @@ BuildRequires:	pkgconfig(zziplib) >= 0.13
 BuildRequires:	ffmpeg-devel
 BuildRequires:	libgme-devel
 BuildRequires:	libmikmod-devel
-BuildRequires:	libmpcdec-devel
+# doesnt work with version in cooker
+#BuildRequires:	libmpcdec-devel
 BuildRequires:	wildmidi-devel
 BuildRequires:	lame-devel
 %if %{build_plf}
@@ -102,52 +104,50 @@ of libfaad2, which is patent-protected.
 
 %build
 # Mad and sidplay option make the build to fail
-%configure \
-	--with-systemdsystemunitdir=%{_unitdir} \
-	--with-zeroconf=auto \
-	--enable-alsa \
-	--enable-ao \
-	--enable-audiofile \
-	--enable-cdio-paranoia \
-	--enable-curl \
-	--enable-flac \
-	--enable-ffmpeg \
-	--enable-fluidsynth \
-	--enable-gme \
-	--enable-id3 \
-	--enable-iso9660 \
-	--enable-jack \
-	--enable-soundcloud \
-	--enable-lsr \
-	--disable-mad \
-	--enable-mikmod \
-	--enable-mms \
-	--enable-modplug \
-	--enable-mpg123 \
-	--enable-openal \
-	--enable-opus \
-	--enable-pulse \
-	--enable-recorder-output \
-	--disable-roar \
-	--enable-shout \
-	--disable-sidplay \
-	--enable-sndfile \
-	--enable-twolame-encoder \
-	--enable-vorbis \
-	--enable-vorbis-encoder \
-	--enable-wave-encoder \
-	--enable-wavpack \
-	--enable-wildmidi \
-	--enable-zzip \
+%meson \
+	-Dsystemd_system_unit_dir=%{_unitdir} \
+	-Dzeroconf=auto \
+	-Dalsa=enabled \
+	-Dao=enabled \
+	-Daudiofile=enabled \
+	-Dcdio_paranoia=enabled \
+	-Dcurl=enabled \
+	-Dflac=enabled \
+	-Dffmpeg=enabled \
+	-Dfluidsynth=enabled \
+	-Dgme=enabled \
+	-Did3tag=enabled \
+	-Diso9660=enabled \
+	-Djack=enabled \
+	-Dsoundcloud=enabled \
+	-Dmad=disabled \
+	-Dmikmod=enabled \
+	-Dmms=enabled \
+	-Dmodplug=enabled \
+	-Dmpg123=enabled \
+	-Dopenal=enabled \
+	-Dopus=enabled \
+	-Dpulse=enabled \
+	-Drecorder=true \
+	-Dshout=enabled \
+	-Dsidplay=disabled \
+	-Dsndfile=enabled \
+	-Dtwolame=enabled \
+	-Dvorbis=enabled \
+	-Dvorbisenc=enabled \
+	-Dwave_encoder=true \
+	-Dwavpack=enabled \
+	-Dwildmidi=enabled \
+	-Dzzip=enabled \
 %if !%{build_plf}
-	--disable-aac \
+	-Dfaad=disabled \
 %endif
-	--enable-sqlite
-%make
+	-Dsqlite=enabled
+%meson_build
 
 
 %install
-%makeinstall_std
+%meson_install
 
 mkdir -p %{buildroot}%{_localstatedir}/lib/mpd
 touch %{buildroot}%{_localstatedir}/lib/mpd/mpd.db
@@ -187,9 +187,10 @@ fi
 %files
 %doc README.md AUTHORS NEWS doc/mpdconf.example
 %{_bindir}/%{name}
-%{_mandir}/man1/*
-%{_mandir}/man5/*
+#{_mandir}/man1/*
+#{_mandir}/man5/*
 %{_tmpfilesdir}*
+%{_iconsdir}/hicolor/scalable/apps/%{name}.svg
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %attr(-,mpd,root) %config(noreplace) %{_sysconfdir}/%{name}.conf
 %defattr(644,mpd,audio)
@@ -205,3 +206,5 @@ fi
 %{_presetdir}/86-mpd.preset
 %attr(644,root,root) %{_unitdir}/%{name}.service
 %attr(644,root,root) %{_unitdir}/%{name}.socket
+%attr(644,root,root) %{_userunitdir}/%{name}.service
+
