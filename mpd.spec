@@ -29,6 +29,7 @@ Source100:	%{name}.rpmlintrc
 Requires(pre,post):	rpm-helper
 Requires(preun,postun):	rpm-helper
 BuildRequires:	meson
+BuildRequires:	pkgconfig(icu-i18n)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(atomic_ops)
