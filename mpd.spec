@@ -11,15 +11,17 @@
 %define extrarelsuffix plf
 %endif
 
+%define majorver %(echo %{version} | cut -d. -f 1-2)
+
 Summary:	MPD, the Music Player Daemon
 
 Name:		mpd
-Version:	0.20.20
-Release:	2%{?extrarelsuffix}
+Version:	0.21.3
+Release:	1%{?extrarelsuffix}
 License:	GPLv2+
 Group:		Sound
 Url:		http://www.musicpd.org/
-Source0:	http://www.musicpd.org/download/%{name}/0.20/%{name}-%{version}.tar.xz
+Source0:	http://www.musicpd.org/download/%{name}/%{majorver}/%{name}-%{version}.tar.xz
 Source1:	%{name}.conf
 Source2:        %{name}.tmpfiles.d
 Source3:	%{name}.logrotate
