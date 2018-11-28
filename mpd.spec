@@ -44,6 +44,7 @@ BuildRequires:	boost-devel
 BuildRequires:	boost-core-devel
 BuildRequires:	bzip2-devel
 BuildRequires:	pkgconfig(libcurl) >= 7.18
+BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(avahi-client)
 # sound servers
@@ -63,6 +64,7 @@ BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libiso9660)
 BuildRequires:	pkgconfig(libmodplug)
 BuildRequires:	pkgconfig(libmpg123)
+BuildRequires:	pkgconfig(libnfs)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libupnp)
 BuildRequires:	pkgconfig(mad)
@@ -84,6 +86,7 @@ BuildRequires:	libmikmod-devel
 #BuildRequires:	libmpcdec-devel
 BuildRequires:	wildmidi-devel
 BuildRequires:	lame-devel
+BuildRequires:	wrap-devel
 %if %{build_plf}
 BuildRequires:	libfaad2-devel
 %endif
@@ -142,6 +145,7 @@ of libfaad2, which is patent-protected.
 	-Dwavpack=enabled \
 	-Dwildmidi=enabled \
 	-Dzzip=enabled \
+        -Dmpcdec=disabled \
 %if !%{build_plf}
 	-Dfaad=disabled \
 %endif
