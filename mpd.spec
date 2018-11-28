@@ -47,6 +47,7 @@ BuildRequires:	pkgconfig(libcurl) >= 7.18
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(avahi-client)
+BuildRequires:	pkgconfig(libchromaprint)
 # sound servers
 BuildRequires:	pkgconfig(alsa) >= 0.9.0
 BuildRequires:	pkgconfig(jack)
@@ -72,6 +73,7 @@ BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(opus)
 BuildRequires:	pkgconfig(samplerate) >= 0.0.15
 BuildRequires:	pkgconfig(shout)
+BuildRequires:	pkgconfig(shine) >= 3.1
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(twolame)
@@ -146,6 +148,9 @@ of libfaad2, which is patent-protected.
 	-Dwildmidi=enabled \
 	-Dzzip=enabled \
         -Dmpcdec=disabled \
+	-Dadplug=disabled \
+	-Dsndio=disabled \
+	-Dlibmpdclient=disabled \
 %if !%{build_plf}
 	-Dfaad=disabled \
 %endif
