@@ -3,5 +3,6 @@ removed_sources:
   mpd-0.20.13.tar.xz: d3f7751462a41bbec39a93b322b33350a6f90208
   mpd-0.20.20.tar.xz: 95b5feb53ebbc043ee2934eb2d239e6a3f6cd775
   mpd-0.21.3.tar.xz: 271cb468f2a1dd63b2daa2db19a03ad19b4ad425
-sources:
   mpd-0.21.4.tar.xz: ae5370bc90209e0f5d955094a83cee37d9ca15d9
+sources:
+  mpd-0.21.10.tar.xz:  f4c086264c5889b34844ae5bdbfbd037c6de7dac
