@@ -78,6 +78,7 @@ BuildRequires:	pkgconfig(soxr)
 BuildRequires:	pkgconfig(twolame)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(vorbisenc)
+BuildRequires:	pkgconfig(vorbisfile)
 BuildRequires:	pkgconfig(wavpack)
 BuildRequires:	pkgconfig(yajl) >= 2.0
 BuildRequires:	pkgconfig(zziplib) >= 0.13
