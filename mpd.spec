@@ -154,7 +154,7 @@ of libfaad2, which is patent-protected.
 	-Dlibmpdclient=disabled \
 	-Dshine=disabled \
 	-Dtremor=disabled \
-	-Dsolaris=disabled \
+	-Dsolaris_output=disabled \
 %if !%{build_plf}
 	-Dfaad=disabled \
 %endif
@@ -223,4 +223,4 @@ fi
 %attr(644,root,root) %{_unitdir}/%{name}.service
 %attr(644,root,root) %{_unitdir}/%{name}.socket
 %attr(644,root,root) %{_userunitdir}/%{name}.service
-
+%attr(644,root,root) %{_prefix}/lib/systemd/user/%{name}.socket
