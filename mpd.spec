@@ -153,6 +153,7 @@ of libfaad2, which is patent-protected.
 	-Dsndio=disabled \
 	-Dlibmpdclient=disabled \
 	-Dshine=disabled \
+	-Dtremor=disabled \
 %if !%{build_plf}
 	-Dfaad=disabled \
 %endif
