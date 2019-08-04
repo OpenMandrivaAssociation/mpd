@@ -154,6 +154,7 @@ of libfaad2, which is patent-protected.
 	-Dlibmpdclient=disabled \
 	-Dshine=disabled \
 	-Dtremor=disabled \
+	-Dsolaris=disabled \
 %if !%{build_plf}
 	-Dfaad=disabled \
 %endif
