@@ -109,7 +109,7 @@ of libfaad2, which is patent-protected.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 # Mad and sidplay option make the build to fail
