@@ -17,7 +17,7 @@ Summary:	MPD, the Music Player Daemon
 
 Name:		mpd
 Version:	0.21.19
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sound
 Url:		http://www.musicpd.org/
@@ -33,7 +33,9 @@ BuildRequires:	pkgconfig(icu-i18n)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(atomic_ops)
+%ifnarch %{ix86} %{arm}
 BuildRequires:	pkgconfig(smbclient)
+%endif
 BuildRequires:	pkgconfig(systemd)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.28
 BuildRequires:	pkgconfig(gthread-2.0)
@@ -128,6 +130,11 @@ of libfaad2, which is patent-protected.
 	-Did3tag=enabled \
 	-Diso9660=enabled \
 	-Djack=enabled \
+%ifnarch %{ix86} %{arm}
+	-Dsmbclient=enabled \
+%else
+	-Dsmbclient=disabled \
+%endif
 	-Dsoundcloud=enabled \
 	-Dmad=disabled \
 	-Dmikmod=enabled \
