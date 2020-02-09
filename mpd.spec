@@ -33,7 +33,7 @@ BuildRequires:	pkgconfig(icu-i18n)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(atomic_ops)
-BuildRequires:	pkgconfig(smbclient)
+#BuildRequires:	pkgconfig(smbclient)
 BuildRequires:	pkgconfig(systemd)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.28
 BuildRequires:	pkgconfig(gthread-2.0)
