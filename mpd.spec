@@ -47,6 +47,7 @@ BuildRequires:	boost-core-devel
 BuildRequires:	bzip2-devel
 BuildRequires:	pkgconfig(libcurl) >= 7.18
 BuildRequires:	pkgconfig(libgcrypt)
+BuildRequires:  pkgconfig(liburing)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(libchromaprint)
