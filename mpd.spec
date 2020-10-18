@@ -45,6 +45,7 @@ BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	boost-devel
 BuildRequires:	boost-core-devel
 BuildRequires:	bzip2-devel
+BuildRequires:  python3dist(sphinx)
 BuildRequires:	pkgconfig(libcurl) >= 7.18
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:  pkgconfig(liburing)
