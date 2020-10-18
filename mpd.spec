@@ -231,3 +231,5 @@ fi
 %attr(644,root,root) %{_unitdir}/%{name}.socket
 %attr(644,root,root) %{_userunitdir}/%{name}.service
 %attr(644,root,root) %{_prefix}/lib/systemd/user/%{name}.socket
+%{_mandir}/man1/mpd.1.*
+%{_mandir}/man5/mpd.conf.5.*
