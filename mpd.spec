@@ -67,6 +67,7 @@ BuildRequires:	pkgconfig(flac) >= 1.2
 BuildRequires:	pkgconfig(flac++)
 BuildRequires:	pkgconfig(id3tag)
 BuildRequires:	pkgconfig(libcdio_paranoia)
+BuildRequires:	pkgconfig(libpipewire-0.3)
 BuildRequires:	pkgconfig(libiso9660)
 BuildRequires:	pkgconfig(libmodplug)
 BuildRequires:	pkgconfig(libmpg123)
