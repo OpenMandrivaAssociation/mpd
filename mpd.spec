@@ -134,6 +134,7 @@ of libfaad2, which is patent-protected.
 	-Did3tag=enabled \
 	-Diso9660=enabled \
 	-Djack=enabled \
+	-Dopenmpt=disabled \
 %ifarch %{ix86} %{arm}
 	-Dsmbclient=disabled \
 %endif
