@@ -57,6 +57,7 @@ BuildRequires:	pkgconfig(alsa) >= 0.9.0
 BuildRequires:	pkgconfig(jack)
 BuildRequires:	pkgconfig(libpulse) >= 0.9.16
 BuildRequires:	pkgconfig(fluidsynth) >= 1.1
+BuildRequires:	pkgconfig(fmt)
 BuildRequires:	pkgconfig(libmms) >= 0.4
 BuildRequires:	pkgconfig(openal)
 # multimedia formats
