@@ -49,6 +49,7 @@ BuildRequires:  python3dist(sphinx)
 BuildRequires:	pkgconfig(libcurl) >= 7.18
 BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:  pkgconfig(liburing)
+BuildRequires:	pkgconfig(libpcre2-8)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(libchromaprint)
