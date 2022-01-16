@@ -17,7 +17,7 @@ Summary:	MPD, the Music Player Daemon
 
 Name:		mpd
 Version:	0.23.5
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Sound
 Url:		http://www.musicpd.org/
