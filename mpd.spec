@@ -17,7 +17,7 @@ Summary:	MPD, the Music Player Daemon
 
 Name:		mpd
 Version:	0.23.7
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sound
 Url:		http://www.musicpd.org/
@@ -198,18 +198,18 @@ cat > %{buildroot}%{_presetdir}/86-mpd.preset << EOF
 enable mpd.socket
 EOF
 
-%pre
-%_pre_useradd %{name} %{_localstatedir}/lib/%{name} /bin/false
-usermod -g audio %{name}
+#pre
+#_pre_useradd %{name} %{_localstatedir}/lib/%{name} /bin/false
+#usermod -g audio %{name}
 
-%post
-if [ $1 -eq 1 ]
-then
-%create_ghostfile %{_localstatedir}/lib/mpd/mpd.db mpd audio 644
-%create_ghostfile %{_localstatedir}/lib/mpd/mpdstate mpd audio 644
-%create_ghostfile %{_localstatedir}/log/mpd/mpd.log mpd audio 644
-%create_ghostfile %{_localstatedir}/log/mpd/mpd.error mpd audio 644
-fi
+#post
+#if [ $1 -eq 1 ]
+#then
+#%create_ghostfile %{_localstatedir}/lib/mpd/mpd.db mpd audio 644
+#%create_ghostfile %{_localstatedir}/lib/mpd/mpdstate mpd audio 644
+#%create_ghostfile %{_localstatedir}/log/mpd/mpd.log mpd audio 644
+#%create_ghostfile %{_localstatedir}/log/mpd/mpd.error mpd audio 644
+#fi
 
 %files
 %doc README.md AUTHORS NEWS doc/mpdconf.example
