@@ -16,7 +16,7 @@
 Summary:	MPD, the Music Player Daemon
 
 Name:		mpd
-Version:	0.23.9
+Version:	0.23.10
 Release:	1
 License:	GPLv2+
 Group:		Sound
@@ -193,23 +193,16 @@ rm -rf %{buildroot}/%{_docdir}/mpd
 
 install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_tmpfilesdir}/mpd.conf
 
+mkdir -p %{buildroot}%{_sysusersdir}
+cat >%{buildroot}%{_sysusersdir}/mpd.conf <<EOF
+u mpd
+m mpd audio
+EOF
+
 install -d %{buildroot}%{_presetdir}
 cat > %{buildroot}%{_presetdir}/86-mpd.preset << EOF
 enable mpd.socket
 EOF
-
-#pre
-#_pre_useradd %{name} %{_localstatedir}/lib/%{name} /bin/false
-#usermod -g audio %{name}
-
-#post
-#if [ $1 -eq 1 ]
-#then
-#%create_ghostfile %{_localstatedir}/lib/mpd/mpd.db mpd audio 644
-#%create_ghostfile %{_localstatedir}/lib/mpd/mpdstate mpd audio 644
-#%create_ghostfile %{_localstatedir}/log/mpd/mpd.log mpd audio 644
-#%create_ghostfile %{_localstatedir}/log/mpd/mpd.error mpd audio 644
-#fi
 
 %files
 %doc README.md AUTHORS NEWS doc/mpdconf.example
@@ -234,6 +227,7 @@ EOF
 %attr(644,root,root) %{_unitdir}/%{name}.service
 %attr(644,root,root) %{_unitdir}/%{name}.socket
 %attr(644,root,root) %{_userunitdir}/%{name}.service
+%attr(644,root,root) %{_sysusersdir}/%{name}.conf
 %attr(644,root,root) %{_prefix}/lib/systemd/user/%{name}.socket
 %{_mandir}/man1/mpd.1.*
 %{_mandir}/man5/mpd.conf.5.*
