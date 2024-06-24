@@ -95,7 +95,7 @@ BuildRequires:	libmikmod-devel
 BuildRequires:	wildmidi-devel
 BuildRequires:	lame-devel
 BuildRequires:	wrap-devel
-BuildRequires:	sidplay-devel
+BuildRequires:	pkgconfig(libsidplayfp)
 %if %{build_plf}
 BuildRequires:	libfaad2-devel
 %endif
