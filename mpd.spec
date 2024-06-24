@@ -17,7 +17,7 @@ Summary:	MPD, the Music Player Daemon
 
 Name:		mpd
 Version:	0.23.15
-Release:	4
+Release:	5
 License:	GPLv2+
 Group:		Sound
 Url:		https://www.musicpd.org/
@@ -194,7 +194,7 @@ install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_tmpfilesdir}/mpd.conf
 
 mkdir -p %{buildroot}%{_sysusersdir}
 cat >%{buildroot}%{_sysusersdir}/mpd.conf <<EOF
-u mpd
+u mpd - - %{_localstatedir}/lib/%{name}
 m mpd audio
 EOF
 
@@ -228,5 +228,5 @@ EOF
 %attr(644,root,root) %{_userunitdir}/%{name}.service
 %attr(644,root,root) %{_sysusersdir}/%{name}.conf
 %attr(644,root,root) %{_prefix}/lib/systemd/user/%{name}.socket
-%{_mandir}/man1/mpd.1.*
-%{_mandir}/man5/mpd.conf.5.*
+%{_mandir}/man1/mpd.1*
+%{_mandir}/man5/mpd.conf.5*
