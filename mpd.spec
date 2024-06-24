@@ -22,7 +22,6 @@ License:	GPLv2+
 Group:		Sound
 Url:		https://www.musicpd.org/
 Source0:	https://www.musicpd.org/download/%{name}/%{majorver}/%{name}-%{version}.tar.xz
-Source1:	%{name}.conf
 Source2:        %{name}.tmpfiles.d
 Source3:	%{name}.logrotate
 Source100:	%{name}.rpmlintrc
@@ -96,8 +95,59 @@ BuildRequires:	libmikmod-devel
 BuildRequires:	wildmidi-devel
 BuildRequires:	lame-devel
 BuildRequires:	wrap-devel
+BuildRequires:	sidplay-devel
 %if %{build_plf}
 BuildRequires:	libfaad2-devel
+%endif
+BuildSystem:	meson
+BuildOption:	-Dsystemd_system_unit_dir=%{_unitdir}
+BuildOption:	-Dzeroconf=auto
+BuildOption:	-Dalsa=enabled
+BuildOption:	-Dao=enabled
+BuildOption:	-Daudiofile=enabled
+BuildOption:	-Dcdio_paranoia=enabled
+BuildOption:	-Dcurl=enabled
+BuildOption:	-Dflac=enabled
+BuildOption:	-Dffmpeg=enabled
+BuildOption:	-Dfluidsynth=enabled
+BuildOption:	-Dgme=enabled
+BuildOption:	-Did3tag=enabled
+BuildOption:	-Diso9660=enabled
+BuildOption:	-Djack=enabled
+BuildOption:	-Dopenmpt=disabled
+%ifarch %{ix86} %{arm}
+BuildOption:	-Dsmbclient=disabled
+%endif
+BuildOption:	-Dsoundcloud=enabled
+BuildOption:	-Dmad=enabled
+BuildOption:	-Dmikmod=enabled
+BuildOption:	-Dmms=enabled
+BuildOption:	-Dmodplug=enabled
+BuildOption:	-Dmpg123=enabled
+BuildOption:	-Dopenal=enabled
+BuildOption:	-Dopus=enabled
+BuildOption:	-Dpulse=enabled
+BuildOption:	-Drecorder=true
+BuildOption:	-Dshout=enabled
+BuildOption:	-Dsidplay=enabled
+BuildOption:	-Dsndfile=enabled
+BuildOption:	-Dtwolame=enabled
+BuildOption:	-Dvorbis=enabled
+BuildOption:	-Dvorbisenc=enabled
+BuildOption:	-Dwave_encoder=true
+BuildOption:	-Dwavpack=enabled
+BuildOption:	-Dwildmidi=enabled
+BuildOption:	-Dzzip=enabled
+BuildOption:	-Dmpcdec=disabled
+BuildOption:	-Dadplug=disabled
+BuildOption:	-Dsndio=disabled
+BuildOption:	-Dlibmpdclient=disabled
+BuildOption:	-Dshine=disabled
+BuildOption:	-Dtremor=disabled
+BuildOption:	-Dsolaris_output=disabled
+BuildOption:	-Dsqlite=enabled
+%if !%{build_plf}
+BuildOption:	-Dfaad=disabled
 %endif
 
 %description
@@ -112,69 +162,10 @@ This package is in restricted repository because it is built with AAC support
 of libfaad2, which is patent-protected.
 %endif
 
+%patchlist
+mpd-0.23-mpdconf.patch
 
-%prep
-%setup -q
-%autopatch -p1
-
-%build
-# Mad and sidplay option make the build to fail
-%meson \
-	-Dsystemd_system_unit_dir=%{_unitdir} \
-	-Dzeroconf=auto \
-	-Dalsa=enabled \
-	-Dao=enabled \
-	-Daudiofile=enabled \
-	-Dcdio_paranoia=enabled \
-	-Dcurl=enabled \
-	-Dflac=enabled \
-	-Dffmpeg=enabled \
-	-Dfluidsynth=enabled \
-	-Dgme=enabled \
-	-Did3tag=enabled \
-	-Diso9660=enabled \
-	-Djack=enabled \
-	-Dopenmpt=disabled \
-%ifarch %{ix86} %{arm}
-	-Dsmbclient=disabled \
-%endif
-	-Dsoundcloud=enabled \
-	-Dmad=disabled \
-	-Dmikmod=enabled \
-	-Dmms=enabled \
-	-Dmodplug=enabled \
-	-Dmpg123=enabled \
-	-Dopenal=enabled \
-	-Dopus=enabled \
-	-Dpulse=enabled \
-	-Drecorder=true \
-	-Dshout=enabled \
-	-Dsidplay=disabled \
-	-Dsndfile=enabled \
-	-Dtwolame=enabled \
-	-Dvorbis=enabled \
-	-Dvorbisenc=enabled \
-	-Dwave_encoder=true \
-	-Dwavpack=enabled \
-	-Dwildmidi=enabled \
-	-Dzzip=enabled \
-        -Dmpcdec=disabled \
-	-Dadplug=disabled \
-	-Dsndio=disabled \
-	-Dlibmpdclient=disabled \
-	-Dshine=disabled \
-	-Dtremor=disabled \
-	-Dsolaris_output=disabled \
-%if !%{build_plf}
-	-Dfaad=disabled \
-%endif
-	-Dsqlite=enabled
-%meson_build
-
-
-%install
-%meson_install
-
+%install -a
 mkdir -p %{buildroot}%{_localstatedir}/lib/mpd
 touch %{buildroot}%{_localstatedir}/lib/mpd/mpd.db
 touch %{buildroot}%{_localstatedir}/lib/mpd/mpdstate
@@ -186,15 +177,15 @@ mkdir -p %{buildroot}%{_localstatedir}/lib/mpd/playlists
 mkdir -p %{buildroot}%{_localstatedir}/lib/mpd/music
 mkdir -p %{buildroot}/lib/systemd/system
 
-install -D -m 644 %{SOURCE1} %{buildroot}/etc/mpd.conf
 install -D -m 644 %{SOURCE3} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 rm -rf %{buildroot}/%{_docdir}/mpd
 
 install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_tmpfilesdir}/mpd.conf
+install -p -D -m 0644 doc/mpdconf.example %{buildroot}%{_sysconfdir}/mpd.conf
 
 mkdir -p %{buildroot}%{_sysusersdir}
 cat >%{buildroot}%{_sysusersdir}/mpd.conf <<EOF
-u mpd - - %{_localstatedir}/lib/%{name}
+u mpd - "Music Player Daemon" %{_localstatedir}/lib/%{name} /bin/nologin
 m mpd audio
 EOF
 
@@ -202,6 +193,16 @@ install -d %{buildroot}%{_presetdir}
 cat > %{buildroot}%{_presetdir}/86-mpd.preset << EOF
 enable mpd.socket
 EOF
+
+%post
+# This is a workaround for the mpd user being created
+# with the wrong home directory in earlier versions
+# of the package.
+# Fixed after 5.0 -- the workaround should be removed
+# when we stop supporting updating from <= 5.0
+groupdel mpd &>/dev/null || :
+userdel mpd &>/dev/null || :
+systemd-sysusers %{_sysusersdir}/%{name}.conf
 
 %files
 %doc README.md AUTHORS NEWS doc/mpdconf.example
