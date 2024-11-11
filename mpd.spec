@@ -25,6 +25,7 @@ Source0:	https://www.musicpd.org/download/%{name}/%{majorver}/%{name}-%{version}
 Source2:        %{name}.tmpfiles.d
 Source3:	%{name}.logrotate
 Source100:	%{name}.rpmlintrc
+
 Requires(pre,post):	rpm-helper
 Requires(preun,postun):	rpm-helper
 BuildRequires:	meson
@@ -164,6 +165,7 @@ of libfaad2, which is patent-protected.
 
 %patchlist
 mpd-0.23-mpdconf.patch
+0001-support-build-with-libfmt-11.0.0.patch
 
 %install -a
 mkdir -p %{buildroot}%{_localstatedir}/lib/mpd
