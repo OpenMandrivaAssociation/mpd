@@ -16,8 +16,8 @@
 Summary:	MPD, the Music Player Daemon
 
 Name:		mpd
-Version:	0.23.15
-Release:	7
+Version:	0.23.16
+Release:	1
 License:	GPLv2+
 Group:		Sound
 Url:		https://www.musicpd.org/
@@ -165,7 +165,6 @@ of libfaad2, which is patent-protected.
 
 %patchlist
 mpd-0.23-mpdconf.patch
-0001-support-build-with-libfmt-11.0.0.patch
 
 %install -a
 mkdir -p %{buildroot}%{_localstatedir}/lib/mpd
