@@ -44,6 +44,7 @@ BuildRequires:		pkgconfig(libchromaprint)
 BuildRequires:		pkgconfig(libcurl) >= 7.18
 BuildRequires:		pkgconfig(libffado)
 BuildRequires:		pkgconfig(libgcrypt)
+BuildRequires:		pkgconfig(libmpdclient)
 BuildRequires:		pkgconfig(libpcre2-8)
 BuildRequires:		pkgconfig(liburing)
 BuildRequires:		pkgconfig(libupnp)
