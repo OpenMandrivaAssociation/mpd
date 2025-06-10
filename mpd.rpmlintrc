@@ -1,6 +1,7 @@
-# The systemd stuff goes in "/lib/systemd": hence
-# this error message is wrong
-addFilter("E: hardcoded-library-path")
+# The systemd stuff goes in "/lib/systemd": hence this error message is wrong
+#addFilter("E: hardcoded-library-path")
+# ... and also this warning
+#addFilter("W: only-non-binary-in-usr-lib")
 
 # False positive: mpd wants an user and a group named "mpd"
 addFilter("W: non-standard-uid")
@@ -8,4 +9,4 @@ addFilter("W: non-standard-gid")
 
 # False positive: this one is the init.d script for mpd
 # and is rightly executable even if in /etc/init.d
-addFilter("E: executable-marked-as-config-file")
+#addFilter("E: executable-marked-as-config-file")
