@@ -184,8 +184,9 @@ fi
 
 
 %build
+# Adplug and libopenmpt are in Extra
 %meson \
-			-Dadplug=enabled \
+			-Dadplug=disabled \
 			-Dalsa=enabled \
 			-Dao=enabled \
 			-Daudiofile=enabled \
