@@ -14,7 +14,7 @@
 
 Summary:		The Music Player Daemon
 Name:		mpd
-Version:		0.24.4
+Version:		0.24.5
 Release:		1
 License:		GPLv2+
 Group:		Sound
@@ -28,6 +28,7 @@ Source100:	%{name}.rpmlintrc
 Patch0:		mpd-0.24.4-fix-mpcdec-header-path.patch
 BuildRequires:		meson
 BuildRequires:		ninja
+BuildRequires:		systemd
 BuildRequires:		avahi-common-devel
 BuildRequires:		boost-devel
 BuildRequires:		boost-core-devel
@@ -47,6 +48,7 @@ BuildRequires:		pkgconfig(libgcrypt)
 BuildRequires:		pkgconfig(libmpdclient)
 BuildRequires:		pkgconfig(libpcre2-8)
 BuildRequires:		pkgconfig(liburing)
+BuildRequires:		pkgconfig(udisks2)
 BuildRequires:		pkgconfig(libupnp)
 BuildRequires:		pkgconfig(nlohmann_json)
 %ifnarch %{ix86} %{arm}
@@ -57,15 +59,18 @@ BuildRequires:		pkgconfig(systemd)
 BuildRequires:		pkgconfig(udisks2)
 BuildRequires:		python3dist(sphinx)
 # Sound servers
+# This is in Extra ATM
+#BuildRequires:	pkgconfig(adplug)
 BuildRequires:		pkgconfig(alsa) >= 0.9.0
 BuildRequires:		pkgconfig(fluidsynth) >= 1.1
 BuildRequires:		pkgconfig(fmt)
 BuildRequires:		pkgconfig(jack)
 BuildRequires:		pkgconfig(libmms) >= 0.4
+BuildRequires:		pkgconfig(libpipewire-0.3)
 BuildRequires:		pkgconfig(libpulse) >= 0.9.16
 BuildRequires:		pkgconfig(openal)
 # Multimedia formats
-BuildRequires:		lame-devel
+BuildRequires:		pkgconfig(lame)
 BuildRequires:		pkgconfig(libavformat)
 BuildRequires:		pkgconfig(libavcodec)
 BuildRequires:		pkgconfig(libavfilter)
@@ -90,9 +95,9 @@ BuildRequires:		pkgconfig(libmodplug)
 BuildRequires:		pkgconfig(libmpg123)
 BuildRequires:		pkgconfig(libnfs)
 # This is in Extra ATM
-#BuildRequires:		pkgconfig(libopenmpt)
-BuildRequires:		pkgconfig(libpipewire-0.3)
+#BuildRequires:	pkgconfig(libopenmpt)
 BuildRequires:		pkgconfig(libsidplayfp)
+BuildRequires:		pkgconfig(libsoup-3.0)
 BuildRequires:		pkgconfig(libupnp)
 BuildRequires:		pkgconfig(mad)
 BuildRequires:		pkgconfig(ogg)
@@ -144,9 +149,10 @@ of libfaad2, which is patent-protected.
 %ghost %{_localstatedir}/lib/%{name}/%{name}.db
 %ghost %{_localstatedir}/lib/%{name}/mpdstate
 %attr(755,mpd,audio) %dir /var/log/%{name}
-%attr(755,mpd,audio) %dir /var/run/%{name}
+#attr(755,mpd,audio) %%dir /var/run/%%{name}
 %ghost /var/log/mpd/%{name}.log
 %ghost /var/log/mpd/%{name}.error
+%ghost /run/mpd
 %{_presetdir}/86-%{name}.preset
 %attr(644,root,root) %{_unitdir}/%{name}.service
 %attr(644,root,root) %{_unitdir}/%{name}.socket
@@ -186,12 +192,15 @@ fi
 
 %build
 # Adplug and libopenmpt are in Extra
+# Our libmpcdec lacks mpc_demux_init: it's too old
 %meson \
 			-Dadplug=disabled \
 			-Dalsa=enabled \
 			-Dao=enabled \
 			-Daudiofile=enabled \
+			-Dbzip2=enabled \
 			-Dcdio_paranoia=enabled \
+			-Dchromaprint=enabled \
 			-Dcue=true \
 			-Dcurl=enabled \
 			-Ddaemon=true \
@@ -209,6 +218,7 @@ fi
 			-Dio_uring=enabled \
 			-Diso9660=enabled \
 			-Djack=enabled \
+			-Dlame=enabled \
 			-Dlibmpdclient=enabled \
 			-Dmad=enabled \
 			-Dmikmod=enabled \
@@ -234,16 +244,17 @@ fi
 			-Dsqlite=enabled \
 			-Dtremor=disabled \
 			-Dtwolame=enabled \
+			-Dudisks=enabled \
+			-Dupnp=auto \
 			-Dvorbis=enabled \
 			-Dvorbisenc=enabled \
 			-Dwave_encoder=true \
 			-Dwavpack=enabled \
 			-Dwildmidi=enabled \
-			-Dsystemd_system_unit_dir=%{_unitdir} \
-			-Dsystemd_user_unit_dir=%{_userunitdir}	\
-			-Dupnp=auto \
 			-Dzeroconf=auto \
-			-Dzzip=enabled
+			-Dzzip=enabled \
+			-Dsystemd_system_unit_dir=%{_unitdir} \
+			-Dsystemd_user_unit_dir=%{_userunitdir}
 
 %meson_build
 
