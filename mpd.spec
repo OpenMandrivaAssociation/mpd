@@ -14,7 +14,7 @@
 
 Summary:		The Music Player Daemon
 Name:		mpd
-Version:		0.24.10
+Version:		0.24.12
 Release:		1
 License:		GPLv2+
 Group:		Sound
@@ -42,7 +42,7 @@ BuildRequires:		pkgconfig(glib-2.0) >= 2.28
 BuildRequires:		pkgconfig(gthread-2.0)
 BuildRequires:		pkgconfig(icu-i18n)
 BuildRequires:		pkgconfig(libchromaprint)
-BuildRequires:		pkgconfig(libcurl) >= 7.18
+BuildRequires:		pkgconfig(libcurl) >= 7.85
 BuildRequires:		pkgconfig(libffado)
 BuildRequires:		pkgconfig(libgcrypt)
 BuildRequires:		pkgconfig(libmpdclient)
@@ -284,7 +284,7 @@ install -p -D -m 0644 %{SOURCE2} %{buildroot}%{_tmpfilesdir}/%{name}.conf
 install -p -D -m 0644 %{SOURCE3} %{buildroot}%{_sysusersdir}/%{name}.conf
 install -D -m 644 %{SOURCE4} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 
-# Create a preset
+# Create a preset for the socket activation
 cat > %{buildroot}%{_presetdir}/86-mpd.preset << EOF
 enable mpd.socket
 EOF
