@@ -14,8 +14,8 @@
 
 Summary:		The Music Player Daemon
 Name:		mpd
-Version:		0.24.12
-Release:		2
+Version:		0.24.13
+Release:		1
 License:		GPLv2+
 Group:		Sound
 Url:		https://www.musicpd.org/
@@ -75,15 +75,13 @@ BuildRequires:		pkgconfig(libavformat)
 BuildRequires:		pkgconfig(libavcodec)
 BuildRequires:		pkgconfig(libavfilter)
 BuildRequires:		pkgconfig(libavutil)
-%if %{build_plf}
-BuildRequires:		libfaad2-devel
-%endif
 BuildRequires:		libmp4v2-devel
 # Version in cooker is too old
 #BuildRequires:		libmpcdec-devel
 BuildRequires:		wrap-devel
 BuildRequires:		pkgconfig(ao)
 BuildRequires:		pkgconfig(audiofile) >= 0.3
+BuildRequires:		pkgconfig(faad2)
 BuildRequires:		pkgconfig(flac) >= 1.2
 BuildRequires:		pkgconfig(flac++)
 BuildRequires:		pkgconfig(id3tag)
@@ -206,9 +204,7 @@ fi
 			-Ddaemon=true \
 			-Ddatabase=true \
 			-Ddsd=true \
-		%if !%{build_plf}
-			-Dfaad=disabled \
-		%endif
+			-Dfaad=enabled \
 			-Dflac=enabled \
 			-Dffmpeg=enabled \
 			-Dfluidsynth=enabled \
